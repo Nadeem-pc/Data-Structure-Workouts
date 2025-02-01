@@ -320,7 +320,6 @@ class HashTable {
   }
 }
 
-// Usage
 const hashTable = new HashTable();
 hashTable.set("name", "Alice");
 hashTable.set("age", 25);
@@ -329,3 +328,20 @@ hashTable.display();
 
 console.log("Get age:", hashTable.get("age"));
 console.log("Get email:", hashTable.get("email"));
+
+// Leetcode qstn : two sum using hashmap
+var twoSum = function(nums, target) {
+  const hashMap = {}; // Create an empty hash map
+
+  for (let i = 0; i < nums.length; i++) {
+    let difference = target - nums[i]; // Find the complement needed
+
+    if (difference in hashMap) {
+      return [hashMap[difference], i]; // Return indices if found
+    }
+
+    hashMap[nums[i]] = i; // Store the index of the current number
+  }
+
+  return []; // No solution case (won't happen as per constraints)
+};
