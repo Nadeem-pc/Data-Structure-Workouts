@@ -1,14 +1,13 @@
+// Stack using array
 class Stack {
     constructor() {
-        this.items = []; // Array to store stack elements
+        this.items = []; 
     }
 
-    // Add an element to the top of the stack
     push(element) {
         this.items.push(element);
     }
 
-    // Remove and return the top element from the stack
     pop() {
         if (this.isEmpty()) {
             return "Stack is empty";
@@ -16,7 +15,6 @@ class Stack {
         return this.items.pop();
     }
 
-    // Return the top element without removing it
     peek() {
         if (this.isEmpty()) {
             return "Stack is empty";
@@ -24,12 +22,10 @@ class Stack {
         return this.items[this.items.length - 1];
     }
 
-    // Check if the stack is empty
     isEmpty() {
         return this.items.length === 0;
     }
 
-    // Return the size of the stack
     size() {
         return this.items.length;
     }
@@ -39,7 +35,6 @@ class Stack {
         this.items = [];
     }
 
-    // Display the stack elements
     printStack() {
         console.log(this.items.join(" "));
     }
@@ -58,54 +53,89 @@ console.log("Stack size:", stack.size()); // Output: 2
 stack.clear();
 console.log("Stack after clearing:", stack.items); // Output: []
 
-// function reverseString(str) {
-//     let stack = [];
-//     // Push each character of the string onto the stack
-//     for (let char of str) {
-//         stack.push(char);
-//     }
-    
-//     let reversedStr = '';
-//     // Pop each character from the stack to reverse the string
-//     while (stack.length > 0) {
-//         reversedStr += stack.pop();
-//     }
 
-//     return reversedStr;
-// }
+// Stack using Object
+class Stack {
+    constructor() {
+        this.stack = {};  // Object to store stack elements
+        this.top = 0;     // Keeps track of the top index
+    }
 
-// console.log(reverseString("hello")); 
+    push(element) {
+        this.stack[this.top] = element;
+        this.top++;
+    }
 
-stack = []
-for(letr char of str){
-    stack.piush(strings)
+    pop() {
+        if (this.isEmpty()) return "Stack is empty!";
+        this.top--;
+        const poppedValue = this.stack[this.top];
+        delete this.stack[this.top]; // Remove from object
+        return poppedValue;
+    }
+
+    peek() {
+        return this.isEmpty() ? "Stack is empty!" : this.stack[this.top - 1];
+    }
+
+    isEmpty() {
+        return this.top === 0;
+    }
+
+    size() {
+        return this.top;
+    }
+
+    printStack() {
+        console.log(this.stack);
+    }
 }
-ler revesed strr = ''
-while(stadk.length > 0){
-    refvesed += stack.op
-}
-// lc20
-// function valid(s){
-//     const stack = []
-//     const pairs = {
-//         '(' : ')',
-//         '[' : ']',
-//         '{' : '}'
-//     }
-//     for(let char of s){
-//         if(char === '{' || char === '[' || char === '('){
-//             stack.push(char)
-//         }else{
-//             if(stack.length === 0 || pairs[stack.pop()] !== char){
-//                 return false
-//             }
-//         }
-//     }
-//     return stack.length === 0
-    
-//   }
-//   t
 
+const myStack = new Stack();
+myStack.push(10);
+myStack.push(20);
+console.log(myStack.pop()); 
+myStack.printStack();
+
+
+// Reverse a string using stack
+function reverseString(str) {
+    let stack = [];
+    for (let char of str) {
+        stack.push(char);
+    }
+    
+    let reversedStr = '';
+    while (stack.length > 0) {
+        reversedStr += stack.pop();
+    }
+    return reversedStr;
+}
+console.log(reverseString("hello")); 
+
+
+// Leetcode 20
+function valid(s){
+    const stack = []
+    const pairs = {
+        '(' : ')',
+        '[' : ']',
+        '{' : '}'
+    }
+    for(let char of s){
+        if(char === '{' || char === '[' || char === '('){
+            stack.push(char)
+        }else{
+            if(stack.length === 0 || pairs[stack.pop()] !== char){
+                return false
+            }
+        }
+    }
+    return stack.length === 0
+}
+
+
+// Stack using queue
 class StackUsingQueue {
     constructor() {
         this.queue1 = []; // Primary queue
@@ -153,7 +183,6 @@ class StackUsingQueue {
     }
 }
 
-// Example usage
 const stack = new StackUsingQueue();
 stack.push(10);
 stack.push(20);
@@ -164,7 +193,7 @@ stack.print(); // Output: 20 10
 console.log("Is stack empty?", stack.isEmpty()); // Output: false
 
 
-// reverse
+// Reverse a Stack
 class Stack {
     constructor() {
         this.items = [];
@@ -189,21 +218,18 @@ class Stack {
         console.log(this.items.join(' '));
     }
 
-    // Reverse the stack
     reverse() {
         const temp = [];
         // Move all elements to the temporary array
         while (!this.isEmpty()) {
             temp.push(this.pop());
         }
-        // Push them back to the stack
         for (let value of temp) {
             this.push(value);
         }
     }
 }
 
-// Example usage
 let stack = new Stack();
 stack.push(10);
 stack.push(20);
@@ -219,7 +245,7 @@ console.log("Reversed Stack:");
 stack.print(); // Output: 40 30 20 10   
 
 
-// stack using LL
+// Stack using Linked list
 class Node {
     constructor(value) {
         this.value = value;
