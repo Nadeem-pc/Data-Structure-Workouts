@@ -278,3 +278,71 @@ cq.enqueue(20)
 cq.enqueue(30)
 cq.enqueue(40)
 cq.display()
+
+// Circular Queue(Fixed size)
+class CircularQueue {
+    constructor(size) {
+        this.queue = new Array(size);
+        this.front = -1;
+        this.rear = -1;
+        this.size = size;
+    }
+
+    isEmpty() {
+        return this.front === -1;
+    }
+
+    isFull() {
+        return (this.rear + 1) % this.size === this.front;
+    }
+
+    enqueue(element) {
+        if (this.isFull()) {
+            return 'Queue is full'
+        }
+        if (this.isEmpty()) {
+            this.front = 0;
+        }
+        this.rear = (this.rear + 1) % this.size;
+        this.queue[this.rear] = element; // ✅ Store the element in the queue
+    }
+
+    dequeue() {
+        if (this.isEmpty()) {
+            return 'Queue is empty'
+        }
+        if (this.front === this.rear) { 
+            this.front = -1;
+            this.rear = -1;
+        }
+        this.front = (this.front + 1) % this.size;
+    }
+
+    peek() {
+        if (this.isEmpty()) {
+            return 'Queue is empty'
+        }
+        return this.queue[this.front];
+    }
+
+    display() {
+        if (this.isEmpty()) {
+            return 'Queue is empty'
+        }
+        let i = this.front;
+        let result = "";
+        while (true) {
+            result += this.queue[i] + " ";
+            if (i === this.rear) break;
+            i = (i + 1) % this.size;
+        }
+        console.log(result); 
+    }
+}
+
+let cq = new CircularQueue(5);
+cq.enqueue(10);
+cq.enqueue(20);
+cq.enqueue(30);
+cq.enqueue(40);
+cq.display();
