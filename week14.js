@@ -78,8 +78,7 @@ console.log('Array after merge sort: ',mergeSort(array4),'\n');
 
 // Quick sort
 function quickSort(arr){
-  if(arr.length <= 1) return arr
-  let pivot = arr[arr.length -1]
+  if(arr.length <= 1) return arr 
   let left = []
   let right = []
   for(let i = 0; i < arr.length -1; i++){
@@ -133,9 +132,7 @@ queue.print()
 console.log(queue.size());
 
 // Hashset
-// Create a Set
 const mySet = new Set();
-
 // Add values
 mySet.add(1);
 mySet.add(2);
@@ -159,60 +156,60 @@ console.log(myArray); // Output: [1]
 // Queue using LL
 class Node {
   constructor(value){
-      this.value = value
-      this.next = null
+    this.value = value
+    this.next = null
   }
 }
 
-class Queue {
+class QueueUsingLL {
   constructor(){
-      this.front= null
-      this.rear = null
-      this.length = 0
+    this.front= null
+    this.rear = null
+    this.length = 0
   }
   enqueue(value){
-      const newNode = new Node(value)
-      if(this.isEmpty()){
-         this.front = this.rear = newNode
-      }else{
-          this.rear.next = newNode
-          this.rear = newNode
-      }
-      this.length ++
+    const newNode = new Node(value)
+    if(this.isEmpty()){
+      this.front = this.rear = newNode
+    }else{
+      this.rear.next = newNode
+      this.rear = newNode
+    }
+    this.length ++
   }
   
   dequeue(){
-      if(this.isEmpty()){
-          return 'Queue is empty'
-      }
-      const dequeuedValue = this.front.value
-      this.front = this.front.next
-      this.length --
-      if(this.front === null){
-          this.rear = null
-      }
-      return dequeuedValue
+    if(this.isEmpty()){
+      return 'Queue is empty'
+    }
+    const dequeuedValue = this.front.value
+    this.front = this.front.next
+    this.length --
+    if(this.front === null){
+      this.rear = null
+    }
+    return dequeuedValue
   }
     isEmpty() {
-      return this.length === 0;
+    return this.length === 0;
   }
   
   print(){
-      let queue = []
-      let current = this.front
-      while(current){
-          queue.push(current.value)
-          current = current.next 
-      }
-      console.log(queue.length ? queue.join(' ') : 'Queue is empty')
+    let queue = []
+    let current = this.front
+    while(current){
+      queue.push(current.value)
+      current = current.next 
+    }
+    console.log(queue.length ? queue.join(' ') : 'Queue is empty')
   }
 }
-let queue = new Queue();
-queue.enqueue(10);
-queue.enqueue(20);
-queue.enqueue(30);
-queue.dequeue()
-queue.print()
+let queue2 = new QueueUsingLL();
+queue2.enqueue(10);
+queue2.enqueue(20);
+queue2.enqueue(30);
+queue2.dequeue()
+queue2.print()
 
 
 // Collision handeled hash table using chaining
@@ -310,14 +307,14 @@ function firstNonRepeatingChar(str) {
   // Find the first non-repeating character in the original string
   for (let char of str) {
       if (char !== " " && hashTable[char.toLowerCase()] === 1) {
-          return char; // Return the original case character
+          return char; 
       }
   }
 
-  return null; // If no non-repeating character is found
+  return null; 
 }
 
-console.log(firstNonRepeatingChar("Swiss")); // Output: "w"
+console.log(firstNonRepeatingChar("Swiss")); 
 
 
 // finding duplicates
@@ -346,4 +343,4 @@ function findUniqueElements(str) {
   
   return Object.keys(hashTable).filter(char => hashTable[char] === 1);
 }
-console.log(findUniqueElements("Swiss")); // Output: ['w', 'i']
+console.log(findUniqueElements("Swiss")); 
