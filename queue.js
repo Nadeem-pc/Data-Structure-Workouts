@@ -217,3 +217,64 @@ reverseQueue(queue);
 
 console.log("Reversed Queue:");
 queue.printQueue(); // Output: 40 30 20 10
+
+
+// Circular queue(Dynamic)
+class CircularQueue {
+    constructor(){
+        this.queue = []
+        this.front = -1
+        this.rear = -1
+    }
+
+    isEmpty(){
+        return this.front === -1
+    }
+
+    enqueue(element){
+        if(this.isEmpty()){
+            this.front = 0
+        }
+        this.rear = (this.rear + 1) % (this.queue.length + 1)
+        this.queue[this.rear] = element
+    }
+
+    dequeue(){
+        if(this.isEmpty()){
+            return 'Queue is empty'
+        }
+        if(this.front === this.rear){
+            this.front = -1
+            this.rear = -1
+        }
+        return this.front = (this.front + 1) % this.queue.length
+    }
+
+    peek(){
+        if(this.isEmpty()){
+            return 'Queue is empty'
+        }
+        return this.queue[this.front]
+    }
+
+    display(){
+        if(this.isEmpty()){
+            return 'Queue is empty'
+        }
+        let i = this.front
+        let result = ""
+        while(true){
+            result += this.queue[i] + " ";
+            if (i === this.rear) break; // Stop when reaching the last element
+            i = (i + 1) % this.queue.length; // Move to the next element circularly
+        }
+        console.log(result);
+    }
+}
+
+let cq = new CircularQueue()
+cq.enqueue(10)
+cq.enqueue(20)
+cq.enqueue(30)
+cq.enqueue(40)
+cq.display()
