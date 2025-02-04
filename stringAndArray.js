@@ -1,5 +1,4 @@
 const array = [4, 5, 1, 2, 0, 4, 1, 2];
-
 function findFirstUnique(arr) {
     const frequency = {};
 
@@ -18,8 +17,7 @@ function findFirstUnique(arr) {
 
     console.log("No unique elements found.");
 }
-
-// findFirstUnique(array);
+findFirstUnique(array);
 
 
 function reverseArray(arr) {
@@ -38,24 +36,8 @@ function reverseArray(arr) {
     }
     return arr;
 }
-
-
-// const arr = [1, 2, 3, 4, 5];
-// console.log(reverseArray(arr)); 
-
-
-const arr = [1,2,3,4,5]
-let sum = 0
-let count = 0
-
-for(let i = 0; i < arr.length; i++){
-    if(arr[i] % 2 == 0){
-        sum += arr[i]
-        count ++
-    }
-}
-const avgOfEven = sum/count
-// console.log('Average is: ',avgOfEven);
+const arr = [1, 2, 3, 4, 5];
+console.log(reverseArray(arr)); 
 
 
 function reverseWords(str) {
@@ -68,10 +50,11 @@ function reverseWords(str) {
     // Join the reversed words into a single string
     return reversedWords.join(' ');
 }
+const str = "Hello World";
+console.log(reverseWords(str));  
 
-// const str = "Hello World";
-// console.log(reverseWords(str));  
 
+// Palindrome
 function checkPalindrome (word){
     let cleanStr = word.toLowerCase()
     let reversedStr = ''
@@ -84,8 +67,10 @@ function checkPalindrome (word){
     return false
 }
 const str = 'Malayalam'
-// console.log(checkPalindrome(str));
+console.log(checkPalindrome(str));
 
+
+// Count vowels in a string
 function countVowels(str) {
     const vowels = 'aeiouAEIOU';
     let count = 0;
@@ -97,4 +82,3 @@ function countVowels(str) {
     return count;
 }
 console.log(countVowels('Nadeem'));
-

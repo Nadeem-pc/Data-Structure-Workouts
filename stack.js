@@ -150,7 +150,7 @@ class StackUsingQueue {
         // Transfer all elements from queue1 to queue2
         while (this.queue1.length > 0) {
             this.queue2.push(this.queue1.shift());
-        }t
+        }
 
         // Swap the queues
         [this.queue1, this.queue2] = [this.queue2, this.queue1];
@@ -317,3 +317,48 @@ console.log(stack.pop());   // Output: 30 (pops the top element)
 console.log(stack.peek());  // Output: 20 (new top of the stack)
 console.log(stack.getSize()); // Output: 2 (size of the stack)
 console.log(stack.isEmpty()); // Output: false (stack is not empty)
+
+
+// Stack that reject duplicates
+class UniqueStack {
+    constructor() {
+        this.stack = [];
+        this.set = new Set(); // Track unique elements
+    }
+
+    push(value) {
+        if (!this.set.has(value)) {
+            this.stack.push(value);
+            this.set.add(value);
+            return true; // Successfully added
+        }
+        return false; // Duplicate rejected
+    }
+
+    pop() {
+        if (this.stack.length === 0) return null; // Stack is empty
+
+        const removed = this.stack.pop();
+        this.set.delete(removed);
+        return removed;
+    }
+
+    isEmpty() {
+        return this.stack.length === 0;
+    }
+
+    display() {
+        console.log(this.stack);
+    }
+}
+
+const stack = new UniqueStack();
+stack.push(10);  // ✅ Added
+stack.push(20);  // ✅ Added
+stack.push(10);  // ❌ Duplicate rejected
+stack.push(30);  // ✅ Added
+
+stack.display();  // Output: [10, 20, 30]
+
+console.log(stack.pop());  // Output: 30
+stack.display();  // Output: [10, 20]

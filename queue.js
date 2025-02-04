@@ -1,4 +1,4 @@
-r// 1. Using an Array
+// 1. Using an Array
 class Queue {
     constructor(){
         this.items = []
@@ -142,6 +142,10 @@ class QueueUsingStacks {
     isEmpty() {
         return this.stack1.length === 0 && this.stack2.length === 0;
     }
+    print() {
+        let result = [...this.stack2.reverse(), ...this.stack1].join(" ");
+        console.log(result);
+    }
 }
 
 let queue = new QueueUsingStacks();
@@ -157,7 +161,7 @@ console.log("Dequeue:", queue.dequeue()); // Output: Dequeue: 20
 
 // Reverse a queue
 class Queue {
-    constructor() {t
+    constructor() {
         this.items = []; // Array to store elements
     }
 
@@ -219,67 +223,8 @@ console.log("Reversed Queue:");
 queue.printQueue(); // Output: 40 30 20 10
 
 
-// Circular queue(Dynamic)
-class CircularQueue {
-    constructor(){
-        this.queue = []
-        this.front = -1
-        this.rear = -1
-    }
 
-    isEmpty(){
-        return this.front === -1
-    }
-
-    enqueue(element){
-        if(this.isEmpty()){
-            this.front = 0
-        }
-        this.rear = (this.rear + 1) % (this.queue.length + 1)
-        this.queue[this.rear] = element
-    }
-
-    dequeue(){
-        if(this.isEmpty()){
-            return 'Queue is empty'
-        }
-        if(this.front === this.rear){
-            this.front = -1
-            this.rear = -1
-        }
-        return this.front = (this.front + 1) % this.queue.length
-    }
-
-    peek(){
-        if(this.isEmpty()){
-            return 'Queue is empty'
-        }
-        return this.queue[this.front]
-    }
-
-    display(){
-        if(this.isEmpty()){
-            return 'Queue is empty'
-        }
-        let i = this.front
-        let result = ""
-        while(true){
-            result += this.queue[i] + " ";
-            if (i === this.rear) break; // Stop when reaching the last element
-            i = (i + 1) % this.queue.length; // Move to the next element circularly
-        }
-        console.log(result);
-    }
-}
-
-let cq = new CircularQueue()
-cq.enqueue(10)
-cq.enqueue(20)
-cq.enqueue(30)
-cq.enqueue(40)
-cq.display()
-
-// Circular Queue(Fixed size)
+// Circular Queue
 class CircularQueue {
     constructor(size) {
         this.queue = new Array(size);
@@ -290,16 +235,13 @@ class CircularQueue {
 
     isEmpty() {
         return this.front === -1;
-    }
+    } 
 
-    isFull() {
+    isCircular() {
         return (this.rear + 1) % this.size === this.front;
     }
-
+    
     enqueue(element) {
-        if (this.isFull()) {
-            return 'Queue is full'
-        }
         if (this.isEmpty()) {
             this.front = 0;
         }
@@ -345,4 +287,7 @@ cq.enqueue(10);
 cq.enqueue(20);
 cq.enqueue(30);
 cq.enqueue(40);
+cq.enqueue(50);
+
+console.log("Is Circular?", cq.isCircular());
 cq.display();

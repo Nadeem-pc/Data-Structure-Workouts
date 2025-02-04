@@ -18,7 +18,7 @@
 // function isAnagram(str1, str2) {
 //     if (str1.length !== str2.length) return false;
 
-//     const charCount = {};
+//     const charCount = {}
 
 //     // Count characters in str1
 //     for (let char of str1) {
@@ -110,51 +110,62 @@ console.log("Get name after delete:", hashTable.get("name"));
 
 // Collision handeled hash table using Linear probing
 class HashTable {
-  constructor(size = 10) {
-      this.size = size;
-      this.table = new Array(size).fill(null);
-  }
+    constructor(size = 5) {
+        this.table = new Array(size);
+        this.size = size;
+    }
 
-  _hash(key) {
-      return [...key].reduce((acc, char) => acc + char.charCodeAt(0), 0) % this.size;
-  }
+    _hash(key) {
+        let hash = 0;
+        for (let char of key) {
+            hash += char.charCodeAt(0);
+        }
+        return hash % this.size;
+    }
 
-  _probe(index, key) {
-      let start = index;
-      while (this.table[index] !== null && this.table[index][0] !== key) {
-          index = (index + 1) % this.size;
-          if (index === start) return -1; // Table is full
-      }
-      return index;
-  }
+    set(key, value) {
+        let index = this._hash(key);
 
-  set(key, value) {
-      let index = this._probe(this._hash(key), key);
-      if (index !== -1) this.table[index] = [key, value];
-  }
+        // LINEAR PROBING: Find the next available slot
+        while (this.table[index] && this.table[index][0] !== key) {
+            index = (index + 1) % this.size;  // Wrap around
+        }
 
-  get(key) {
-      let index = this._probe(this._hash(key), key);
-      return index !== -1 && this.table[index] ? this.table[index][1] : undefined;
-  }
+        this.table[index] = [key, value];  // Store key-value pair
+    }
 
-  delete(key) {
-      let index = this._probe(this._hash(key), key);
-      if (index !== -1) this.table[index] = null;
-  }
+    get(key) {
+        let index = this._hash(key);
 
-  display() {
-      this.table.forEach(pair => pair && console.log(`${pair[0]} : ${pair[1]}`));
-  }
+        // LINEAR PROBING: Search for the key in case of collisions
+        while (this.table[index]) {
+            if (this.table[index][0] === key) {
+                return this.table[index][1];  // Return the value if found
+            }
+            index = (index + 1) % this.size;
+        }
+
+        return undefined;  // Key not found
+    }
+
+    display() {
+        this.table.forEach(entry => {
+            if (entry) {
+                console.log(`${entry[0]} : ${entry[1]}`);
+            }
+        });
+    }
 }
 
-const hashTable = new HashTable();
-hashTable.set("name", "Alice");
-hashTable.set("age", 25);
-hashTable.display();
-console.log("Get name:", hashTable.get("name"));
-hashTable.delete("name");
-console.log("Get name after delete:", hashTable.get("name"));
+// ✅ Testing the Linear Probing Hash Table
+const table = new HashTable();
+table.set('name', "Nadeem");
+table.set('age', 18);
+table.set('dream', "BMW M5 CS");
+table.display();
+
+console.log("Value for 'age':", table.get('age'));  // Should return 18
+console.log("Value for 'unknown':", table.get('unknown'));  // Should return undefined
 
 // Find occurrence of each character in a string using hashTable
 function countOccurrences(str) {
@@ -174,7 +185,6 @@ countOccurrences("hello world");
 function firstNonRepeatingChar(str) {
   const hashTable = {};
 
-  // Count occurrences (case-insensitive)
   const lowerStr = str.toLowerCase();
   for (let char of lowerStr) {
       if (char !== " ") hashTable[char] = (hashTable[char] || 0) + 1;
@@ -190,7 +200,6 @@ function firstNonRepeatingChar(str) {
   return null; // If no non-repeating character is found
 }
 
-// Example usage
 console.log(firstNonRepeatingChar("Swiss")); // Output: "w"
 
 
@@ -218,7 +227,7 @@ class HashTable {
           this.table[index] = []
       }
       for(let pair of this.table[index]){
-          if(pair[0] === key){
+          if(pair[0] === key){t
               pair[1] = value
               return 
           }
@@ -275,7 +284,7 @@ class HashTable {
 
   // Secondary Hash Function
   _hash2(key) {
-      let hash = 1;
+      let hash = 1;             
       for (let char of key) {
           hash += char.charCodeAt(0);
       }
@@ -284,16 +293,15 @@ class HashTable {
 
   // Insert Using Double Hashing
   set(key, value) {
-      let index = this._hash(key);
-      let step = this._hash2(key);
-      let i = 0;
-
-      while (this.table[index] && this.table[index][0] !== key) {
-          i++;
-          index = (index + i * step) % this.size; // Double Hashing formula
-      }
-
-      this.table[index] = [key, value];
+    let index = this._hash(key)
+    const step = this._hash2(key)
+    let i = 0
+    let newIndex = index
+    while(this.table[newIndex] && this.table[newIndex][0] !== key){
+        i++
+        newIndex = (index + i * step) % this.size
+    }
+    this.table[newIndex] = [key,value]
   }
 
   // Get value
@@ -312,22 +320,21 @@ class HashTable {
 
   // Display Hash Table
   display() {
-      this.table.forEach((bucket, index) => {
-          if (bucket) {
-              console.log(`${index}: ${bucket[0]} → ${bucket[1]}`);
-          }
-      });
+    this.table.forEach((bucket,index) => {
+        if(bucket){
+           console.log(`${bucket[0]} : ${bucket[1]}`)
+        }
+    })
   }
 }
 
-const hashTable = new HashTable();
-hashTable.set("name", "Alice");
-hashTable.set("age", 25);
-hashTable.set("email", "alice@example.com");
-hashTable.display();
-
-console.log("Get age:", hashTable.get("age"));
-console.log("Get email:", hashTable.get("email"));
+const hashTable = new HashTable()
+hashTable.set('name','Nadeem')
+hashTable.set('mean', 'Developer');
+hashTable.set('dream','BMW M5 Cs')
+hashTable.set('car', 'Porsche 911');
+hashTable.set('race', 'Formula 1'); 
+hashTable.display()
 
 // Leetcode qstn : two sum using hashmap
 var twoSum = function(nums, target) {
