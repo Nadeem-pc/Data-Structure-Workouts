@@ -1,6 +1,5 @@
 class Node{
-    constructor(value){
-        this.value = value;
+    constructor(value){ 
         this.left = null;
         this.right = null;
     }
@@ -37,16 +36,15 @@ class BinarySearchTree{
     }
     search(root,value){
         if(!root){
-            return false;
-        }else{
-            if(root.value===value){
-                return true;
-            }else if(root.value>value){
-                return this.search(root.left, value);
-            }else{
-                return this.search(root.right, value);
-            }
+            return false
         }
+        if(root.value === value){
+            return true
+        }
+        if(root.value > value){
+            return this.search(root.left,value)
+        }
+        return this.search(root.right,value)
     }
     preOrder(root){
         if(root){
@@ -141,17 +139,27 @@ class BinarySearchTree{
         }
         return closest;
     }
-    isBST(root,min=-Infinity ,max=Infinity){
+    isBst(root, min = -Infinity, max = Infinity){
         if(!root){
-            return true;
+            return true
         }
-        if(root.value>=max || root.value<=min){
-            return false;
+        if(root.value > max || root.value <= min){
+            return false
         }
-        return (this.isBST(root.left,min,root.value)&&this.isBST(root.right,root.value))
+        return(
+            this.isBst(root.left,min,root.value) && 
+            this.isBst(root.right,root.value,max)
+        )
     }
-    
-    
+    depth(root){
+        if(!root){
+            return 0;
+        }
+        let leftDepth = this.depth(root.left);
+        let rightDepth = this.depth(root.right);
+        
+        return Math.max(leftDepth, rightDepth) + 1;
+    }
 }
 
 const bst = new BinarySearchTree();
@@ -175,3 +183,4 @@ bst.levelOrder()
 console.log('Minimum value is:',bst.min(bst.root))
 console.log('Maximum value is:',bst.max(bst.root))
 console.log('Closest value of ',12,' is:',bst.findClosest(12))
+console.log("Depth of BST:", bst.depth(bst.root)); 
