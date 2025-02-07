@@ -160,6 +160,19 @@ class BinarySearchTree{
         
         return Math.max(leftDepth, rightDepth) + 1;
     }
+    isSameTree(root1, root2){
+        if(!root1 && !root2){
+            return true; // Both trees are empty
+        }
+        if(!root1 || !root2){
+            return false; // One tree is empty, the other is not
+        }
+        if(root1.value !== root2.value){
+            return false; // Root values are different
+        }
+        // Recursively check left and right subtrees
+        return this.isSameTree(root1.left, root2.left) && this.isSameTree(root1.right, root2.right);
+    }
 }
 
 const bst = new BinarySearchTree();
