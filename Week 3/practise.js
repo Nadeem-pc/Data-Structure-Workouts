@@ -1,83 +1,38 @@
-class Node {
+class Graph {
     constructor(){
-        this.children = {}
-        this.isEndOfWord = false
+        this.adjList = {}
+    }
+    addVertex(vertex){
+        if(!this.adjList[vertex]){
+            this.adjList[vertex] = new Set()
+        }
+    }
+    addEdge(vertex1,vertex2){
+        if(!this.adjList[vertex1]){
+            this.addVertex(vertex1)
+        }
+        if(!this.adjList[vertex2]){
+            this.addVertex(vertex2)
+        }
+        this.adjList[vertex1].add(vertex2)
+        this.adjList[vertex2].add(vertex1)
+    }
+    hasEdge(vertex1,vertex2){
+        return this.adjList[vertex1].has(vertex2) && this.adjList[vertex2].has(vertex1)
+    }
+    removeEdge(vertex1, vertex2){
+        this.adjList[vertex1].delete(vertex2)
+        this.adjList[vertex2].delete(vertex1)
+    }
+    display(){
+        for(let vertex in this.adjList){
+            console.log(vertex, '=>', [...this.adjList[vertex]])
+        }
     }
 }
-class Trie {
-    constructor(){
-        this.root = new Node()
-    }
-    insert(word){
-        let node = this.root
-        for(let char of word){
-            if(!node.children[char]){
-                node.children[char] = new Node()
-            }
-            node = node.children[char]
-        }
-        node.isEndOfWord = true
-    }    
-    search(word){
-        let node = this.root
-        for(let char of word){
-            if(!node.children[char]) return false
-            node = node.children[char]
-        }
-        return node.isEndOfWord
-    }
-    startWith(prefix){
-        let node = this.root
-        for(let char of prefix){
-            if(!node.children[char]) return false
-            node = node.children[char]
-        }
-        return true
-    }
-    getAllWords(){
-        let words = []
-        this._dfs(this.root, "", words)
-        return words
-    }
-    _dfs(node, count){
-        if(node.isEndOfWord){
-            count++
-        }
-        // for(let char in node.children){
-        //     this._dfs(node.children[char], prefix + char, words)
-        // }
-    }
-    autoComplete(prefix){
-        let node = this.root
-        for(let char of prefix){
-            if(!node.children[char]) return 'No matches'
-            node = node.children[char]
-        }
-        let words = []
-        this._dfs(node,prefix,words)
-        return words
-    }
-    countWords(){
-        return this.countWordsHelper(this.root)
-    }
-    countWordsHelper(node){
-        let count = 0
-        if(node.isEndOfWord) count++
-        for(let char in node.children){
-            count += this.countWordsHelper(node.children[char])
-        }
-        return count
-    }
-} 
-const trie = new Trie()
-trie.insert('car')
-trie.insert('cap')
-trie.insert('sherin')
-// console.log(trie.search('cap'));
-// console.log(trie.startWith('she'));
-// console.log(trie.startWith('raja'));
-// console.log(trie.getAllWords())
-// console.log(trie.autoComplete('ca'));  
-// console.log(trie.autoComplete('do'));  
-// console.log(trie.autoComplete('sh'));  
-console.log(trie.countWords());
+const graph = new Graph()
+graph.addEdge('A','B')
+graph.addEdge('C','D')
+console.log(graph.hasEdge('A','B'))
+graph.removeEdge('C','D')
+graph.display()
