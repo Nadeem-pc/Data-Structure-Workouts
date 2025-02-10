@@ -69,8 +69,7 @@ class Trie {
     }
 }
 
-const trie = new Trie();
-trie.insert('car');
+const trie = new Trie();  
 trie.insert('cap');
 trie.insert('cat');
 trie.insert('care');
