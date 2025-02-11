@@ -1,19 +1,3 @@
-// Insertion sort
-function insertionSort(arr){
-  for(let i = 1; i < arr.length; i++){
-    let key = arr[i]
-    let j = i - 1
-    while(j >= 0 && arr[j] > key){
-      arr[j+1] = arr[j]
-      j--
-    }
-    arr[j+1] = key
-  }
-  return arr
-}
-const array2 = [23,21,78,46,27,1]
-console.log("Array after Insertion sort: ",insertionSort(array2),'\n')
-
 // Merge 2 sorted Linked list
 class ListNode {
   constructor(val = 0, next = null) {
