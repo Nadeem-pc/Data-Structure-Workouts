@@ -11,21 +11,13 @@ function bubbleSort(arr){
         }
         if(!isSwapped) break
     }
+    return arr
 }
-
 const array = [5,4,3,1,2]
-bubbleSort(array)
-// console.log(array);
+console.log(bubbleSort(array))
 
 
-
-
-
-// Decsending order
-// just change the condition into (arr[j] < arr[j+1])
-
-
-// 3. Sorting Strings Alphabetically
+// Sorting Strings Alphabetically
 function bubbleSortStrings(arr, order = "asc") {
     let n = arr.length;
 
@@ -39,7 +31,6 @@ function bubbleSortStrings(arr, order = "asc") {
             }
         }
     }
-
     return arr;
 }
 
