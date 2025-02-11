@@ -42,9 +42,8 @@ class Graph{
         if (visited.has(start)) return;
         console.log(start);
         visited.add(start);
-        let neighbors = this.adjusantList[start]; 
-        if (neighbors) {
-            for (let neighbor of neighbors) {
+        if (this.adjList[start]){
+            for (let neighbor of this.adjusantList[start]) {
                 this.dfs(neighbor, visited);
             }
         }
