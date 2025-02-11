@@ -1,21 +1,3 @@
-// Bubble sort
-function bubbleSort(arr){
-  let swapped 
-  for(let i = 0; i < arr.length; i++){
-    swapped = false
-    for(let j = 0; j < arr.length - i - 1; j++){
-      if(arr[j] > arr[j+1]){
-        [arr[j],arr[j+1]] = [arr[j+1],arr[j]]
-        swapped = true
-      }
-    }
-    if(!swapped) break
-  }
-  return arr
-}
-const array = [23,5,12,78,4,2]
-console.log('\n',"Array after bubble sort: ",bubbleSort(array),'\n')
-
 // Insertion sort
 function insertionSort(arr){
   for(let i = 1; i < arr.length; i++){
