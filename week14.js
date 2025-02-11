@@ -14,66 +14,48 @@ function insertionSort(arr){
 const array2 = [23,21,78,46,27,1]
 console.log("Array after Insertion sort: ",insertionSort(array2),'\n')
 
-// Selection sort
-function selectionSort(arr){
-  for(let i = 0; i < arr.length -1; i++){
-    let minIndex = i
-    for(let j = i + 1; j < arr.length; j++){
-      if(arr[j] < arr[minIndex]){
-        minIndex = j
-      }
-    }
-    if(minIndex !== i){
-      [arr[i],arr[minIndex]] = [arr[minIndex],arr[i]]
-    }
+// Merge 2 sorted Linked list
+class ListNode {
+  constructor(val = 0, next = null) {
+      this.val = val;
+      this.next = next;
   }
-  return arr
-}
-const array3 = [4,87,1,27,9,2]
-console.log('Array after selection sort: ',selectionSort(array3),'\n');
-  
-// Merge sort
-function mergeSort(arr){
-  if(arr.length <= 1) return arr
-  let mid = Math.floor(arr.length / 2)
-  let left = mergeSort(arr.slice(0,mid))
-  let right = mergeSort(arr.slice(mid))
-  return merge(left,right)
 }
 
-function merge(left,right){
-  let result = []
-  let i = 0, j = 0
-  while(i < left.length && j < right.length){
-    if(left[i] < right[j]){
-      result.push(left[i])
-      i++
-    }else{
-      result.push(right[j])
-      j++
-    }
-  }
-  return result.concat(left.slice(i)).concat(right.slice(j))
-}
-const array4 = [4,2,7,58,4,2]
-console.log('Array after merge sort: ',mergeSort(array4),'\n');
+// Function to merge two sorted linked lists
+var mergeTwoLists = function(list1, list2) {
+  if (!list1) return list2; // If list1 is null, return list2
+  if (!list2) return list1; // If list2 is null, return list1
 
-// Quick sort
-function quickSort(arr){
-  if(arr.length <= 1) return arr 
-  let left = []
-  let right = []
-  for(let i = 0; i < arr.length -1; i++){
-    if(arr[i] < pivot){
-      left.push(arr[i])
-    }else{
-      right.push(arr[i])
-    }
+  // Choose the starting point based on the smaller value
+  if (list1.val < list2.val) {
+      list1.next = mergeTwoLists(list1.next, list2); // Recursively merge the rest
+      return list1;
+  } else {
+      list2.next = mergeTwoLists(list1, list2.next); // Recursively merge the rest
+      return list2;
   }
-  return [...quickSort(left), pivot, ...quickSort(right)]
+};
+
+// Function to print the linked list
+function printList(node) {
+  let result = '';
+  while (node !== null) {
+      result += node.val + ' ';
+      node = node.next;
+  }
+  console.log(result.trim());
 }
-const array5 = [3,24,7,8,1,5]
-console.log('Array after quick sort: ',quickSort(array5),'\n')
+
+// Directly create linked lists
+let list1 = new ListNode(1, new ListNode(3, new ListNode(5)));
+let list2 = new ListNode(2, new ListNode(4, new ListNode(6)));
+
+// Merge the two lists
+let mergedList = mergeTwoLists(list1, list2);
+
+// Print the merged linked list
+printList(mergedList); // Output: 1 2 3 4 5 6
 
 // Queue implementation
 class Queue {
