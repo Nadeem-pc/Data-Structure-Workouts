@@ -19,7 +19,7 @@ class Graph {
     }
     display(){
         for(let vertex in this.adjList){
-            console.log(vertex,'=>',[...this.adjList[vertex]])
+            console.log(vertex, '=>',[...this.adjList[vertex]])
         }
     }
     hasEdge(vertex1,vertex2){
@@ -31,12 +31,22 @@ class Graph {
     }
     removeVertex(vertex){
         if(!this.adjList[vertex]) return
-        for(let adjVertex of this.adjList[vertex]){
-            this.removeEdge(vertex,adjVertex)
+        for(let adjusantVertex of this.adjList[vertex]){
+            this.removeEdge(vertex,adjusantVertex)
         }
         delete this.adjList[vertex]
     }
-    dfs(start){
+    depthFirstSearch(start, visited = new Set()){
+        if(visited.has(start)) return
+        console.log(start)
+        visited.add(start)
+        if(this.adjList[start]){
+            for(let neighbor of this.adjList[start]){
+                this.depthFirstSearch(neighbor,visited)
+            }
+        }
+    }
+    breadthFirstSearch(start){
         let queue = [start]
         let visited = new Set()
         let result = []
@@ -53,20 +63,19 @@ class Graph {
         }
         return result
     }
-    bfs(start,visited = new Set()){
-        if(visited.has(start)) return
-        console.log(start)
-        visited.add(start)
-        for(let neighbor of this.adjList[start]){
-            this.bfs(neighbor, visited)
-        }
+    findNeighbour(vertex){
+        if(!this.adjList[vertex]) return 
+        return [...this.adjList[vertex]]
     }
 }
 const graph = new Graph()
 graph.addEdge('A','B')
-graph.addEdge('C','D')
-console.log(graph.hasEdge('A','C'))
-// graph.removeEdge('A','B')
-graph.bfs('A')
-// graph.removeVertex('A')
+graph.addEdge('A','C')
+graph.addEdge('D','E')
+graph.removeEdge('D','E')
+graph.removeVertex('E')
 graph.display()
+graph.depthFirstSearch('A')
+console.log(graph.breadthFirstSearch('B'))
+console.log(graph.hasEdge('A','B'))
+console.log(graph.findNeighbour('A'))
