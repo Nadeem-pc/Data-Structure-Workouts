@@ -48,23 +48,20 @@ class MaxHeap {
     }
 
     heapifyDown(i){
-        let n = this.heap.length;
-        let arr = this.heap;
-        let largest = i;
-        let left = 2 * i + 1;
-        let right = 2 * i + 2;
-    
-        if(left < n && arr[left] > arr[largest]){
-            largest = left;
+        let n = this.heap.length
+        let largest = i
+        let left = this.getLeftIndex()
+        let right = this.getRightIndex()
+        
+        if(left < n && this.heap[left] > this.heap[largest]){
+            largest = left
         }
-    
-        if(right < n && arr[right] > arr[largest]){
-            largest = right;
+        if(right < n && this.heap[right] > this.heap[largest]){
+            largest = right
         }
-    
         if(largest !== i){
-            [arr[i], arr[largest]] = [arr[largest], arr[i]];
-            this.heapifyDown(largest);
+            [this.heap[i], this.heap[largest]] = [this.heap[largest], this.heap[i]]
+            this.heapifyDown(largest)
         }
     }
 
