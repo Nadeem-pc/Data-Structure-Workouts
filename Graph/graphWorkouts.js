@@ -67,6 +67,13 @@ class Graph {
 
         return allPaths.reduce((longest, path) => path.length > longest.length ? path : longest, []);
     }
+    
+    findNeighbour(vertex){
+        if(this.adjList[vertex]){
+            null
+        }
+        return [...this.adjList[vertex]]
+    }
 }
 
 const graph = new Graph();
@@ -81,3 +88,5 @@ graph.addEdge("E", "F");
 console.log("Shortest Path from A to F:", graph.shortestPath("A", "F"));
 console.log("All Paths from A to F:", graph.allPaths("A", "F"));
 console.log("Longest Path from A to F:", graph.longestPath("A", "F"));
+
+console.log(graph.findNeighbour('A'))
