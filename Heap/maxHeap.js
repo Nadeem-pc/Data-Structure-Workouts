@@ -43,26 +43,28 @@ class MaxHeap {
 
         const max = this.heap[0];
         this.heap[0] = this.heap.pop();
-        this.heapifyDown();
+        this.heapifyDown(0);
         return max;
     }
 
-    heapifyDown() {
-        let index = 0;
-        while (this.getLeftIndex(index) < this.heap.length) {
-            let larger = this.getLeftIndex(index);
-            let right = this.getRightIndex(index);
-            
-            if (right < this.heap.length && this.heap[right] > this.heap[larger]) {
-                larger = right;
-            }
-
-            if (this.heap[index] < this.heap[larger]) { 
-                this.swap(index, larger);
-                index = larger;
-            } else {
-                break;
-            }
+    heapifyDown(i){
+        let n = this.heap.length;
+        let arr = this.heap;
+        let largest = i;
+        let left = 2 * i + 1;
+        let right = 2 * i + 2;
+    
+        if(left < n && arr[left] > arr[largest]){
+            largest = left;
+        }
+    
+        if(right < n && arr[right] > arr[largest]){
+            largest = right;
+        }
+    
+        if(largest !== i){
+            [arr[i], arr[largest]] = [arr[largest], arr[i]];
+            this.heapifyDown(largest);
         }
     }
 
@@ -79,6 +81,6 @@ heap.insert(8);
 heap.insert(2);
 
 console.log(heap.heap); 
-console.log(heap.peek()); 
-console.log(heap.extractMax()); 
-console.log(heap.peek()); 
+// console.log(heap.peek()); 
+heap.extractMax()
+console.log(heap.heap); 

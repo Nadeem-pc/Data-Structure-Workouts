@@ -40,25 +40,25 @@ class MinHeap{
 
         const min = this.heap[0];
         this.heap[0] = this.heap.pop();
-        this.heapifyDown();
+        this.heapifyDown(0);
         return min
     }
 
-    heapifyDown(){
-        let index = 0;
-        while(this.getLeftIndex(index)<this.heap.length){
-            let smaller = this.getLeftIndex(index);
-            let right = this.getRightIndex(index);
-            if(right < this.heap.length && this.heap[right] < this.heap[smaller]){
-                smaller = right;  
-            }
-            if(this.heap[index] > this.heap[smaller]){
-                this.swap(index,smaller);
-                index = smaller;
-
-            }else{
-                break
-            }
+    heapifyDown(i){
+        let n = this.heap.length
+        let arr = this.heap
+        let smallest = i;
+        let left = 2*i+1;
+        let right = 2*i+2;
+        if(left<n && arr[left]<arr[smallest]){
+            smallest = left
+        }
+        if(right<n && arr[right]<arr[smallest]){
+            smallest = right;
+        }
+        if(smallest!==i){
+            [arr[i],arr[smallest]]=[arr[smallest],arr[i]];
+            this.heapifyDown(smallest);
         }
     }
     
@@ -73,7 +73,8 @@ heap.insert(9);
 heap.insert(12);
 heap.insert(8);
 heap.insert(2);
-console.log(heap.heap);
 console.log(heap.peek());
+console.log(heap.heap);
 console.log(heap.extractMin());
+console.log(heap.heap)
 console.log(heap.peek());
