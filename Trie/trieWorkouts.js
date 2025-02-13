@@ -24,16 +24,16 @@ class Trie {
     // Retrieve all words stored in the Trie
     getAllWords(){
         let words = []
-        this._dfs(this.root, "", words)
+        this.collectWords(this.root, "", words)
         return words
     }
     
-    _dfs(node, prefix, words){
+    collectWords(node, prefix, words){
         if(node.isEndOfWord){
             words.push(prefix)
         }
         for(let char in node.children){
-            this._dfs(node.children[char], prefix + char, words)
+            this.collectWords(node.children[char], prefix + char, words)
         }
     }
 
