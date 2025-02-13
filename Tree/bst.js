@@ -144,7 +144,7 @@ class BinarySearchTree{
         if(!root){
             return true
         }
-        if(root.value > max || root.value <= min){
+        if(root.value >= max || root.value < min){
             return false
         }
         return(
