@@ -11,7 +11,7 @@ class BinarySearchTree {
     }
     insert(value){
         const newNode = new Node(value)
-        if(!this.root){
+        if(this.root === null){
             this.root = newNode
         }else{
             this.insertNode(this.root,newNode)
@@ -21,8 +21,9 @@ class BinarySearchTree {
         if(newNode.value < root.value){
             if(root.left === null){
                 root.left = newNode
-            }else
-            this.insertNode(root.left,newNode)
+            }else{
+                this.insertNode(root.left,newNode)
+            }
         }else{
             if(root.right === null){
                 root.right = newNode
@@ -41,103 +42,50 @@ class BinarySearchTree {
     preOrder(root){
         if(root){
             console.log(root.value)
-            this.inOrder(root.left)
-            this.inOrder(root.right)
+            this.preOrder(root.left)
+            this.preOrder(root.right)
         }
     }
     postOrder(root){
         if(root){
-            this.inOrder(root.left)
-            this.inOrder(root.right)
+            this.postOrder(root.left)
+            this.postOrder(root.right)
             console.log(root.value)
-        }
-    }
-    levelOrder(){
-        const queue = []
-        queue.push(this.root)
-        while(queue.length){
-            let current = queue.shift()
-            console.log(current.value)
-            if(current.left){
-                queue.push(current.left)
-            }
-            if(current.right){
-                queue.push(current.right)
-            }
         }
     }
     search(root,value){
         if(!root) return false
         if(root.value === value) return true
-        if(root.value > value){
+        if(root.value < value){
+            return this.search(root.right,value)
+        }else{
             return this.search(root.left,value)
         }
-        return this.search(root.right,value)
     }
-    min(root){
-        if(!root.left){
-            return root.value
-        }
-        return this.min(root.left)
+   leafNodes(root){
+    if(!root) return 
+    if(!root.left && !root.right){
+        console.log(root.value)
+        return
     }
-    max(root){
-        if(!root.right){
-            return root.value
-        }
-        return this.max(root.right)
-    }
-    delete(value){
-        this.root = this.deleteNode(this.root,value)
-    }
-    deleteNode(root,value){
-        if(!root) return null
-        if(root.value > value){
-            root.left = this.deleteNode(root.left,value)
-        }
-        else if(root.value < value){
-            root.right = this.deleteNode(root.right,value)
-        }
-        else{
-            if(!root.left && !root.right){
-                return null
-            }
-            if(!root.right){
-                return root.left
-            }
-            else if(!root.left){
-                return root.right
-            }
-            root.value = this.min(root.right)
-            root.right = this.deleteNode(root.right,root.value)
-        }
-        return root
-    }
-
-    isBst(root,min=-Infinity,max = Infinity){
-        if(!root) return true
-        if(root.value >= max || root.value < min){
-            return false
-        }
-        return(
-            this.isBst(root.left,min,root.value)&&
-            this.isBst(root.right,root.value,max)
-        )
-    }
+    this.leafNodes(root.left)
+    this.leafNodes(root.right)
+   }
 }
 const bst = new BinarySearchTree()
-bst.insert(19)
-bst.insert(27)
-bst.insert(16)
-// console.log('Inorder traversal:')
+bst.insert(5)
+bst.insert(10)
+bst.insert(15)
+bst.insert(20)
+bst.insert(25)
+// console.log('Inorder')
 // bst.inOrder(bst.root)
-// bst.delete(27)
-// console.log('after')
-// bst.inOrder(bst.root)
-// console.log('Preorder')
+// console.log('Preorder');
 // bst.preOrder(bst.root)
-// console.log('post order')
+// console.log('Postorder');
 // bst.postOrder(bst.root)
-// console.log(bst.search(bst.root,16))
-// console.log('bfs traversal')
-// bst.levelOrder()
-console.log(bst.isBst(bst.root))
+
+// console.log(bst.search(bst.root,10))
+// console.log(bst.search(bst.root,100))
+
+bst.leafNodes(bst.root)

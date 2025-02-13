@@ -101,7 +101,7 @@ class BinarySearchTree{
     }
     deleteNode(root,value){
         if(!root) return null
-        
+
         if(value<root.value){
             root.left = this.deleteNode(root.left,value)
         }else if(value > root.value){
@@ -199,8 +199,8 @@ class BinarySearchTree{
     
         if (!root.left && !root.right) {
             console.log(root.value); 
+            return
         }
-    
         this.findLeafNodes(root.left);
         this.findLeafNodes(root.right);
     }
