@@ -51,17 +51,17 @@ class Trie {
         }
 
         let words = [];
-        this._dfs(node, prefix, words);
+        this.collectWords(node, prefix, words);
         return words;
     }
     
-    // Helper function for DFS traversal to collect words
-    _dfs(node, prefix, words){
+    // Helper function for traversal to collect words
+    collectWords(node, prefix, words){
         if(node.isEndOfWord){
             words.push(prefix)
         }
         for(let char in node.children){
-            this._dfs(node.children[char], prefix + char, words)
+            this.collectWords(node.children[char], prefix + char, words)
         }
     }
 }
