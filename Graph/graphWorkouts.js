@@ -74,6 +74,31 @@ class Graph {
         }
         return [...this.adjList[vertex]]
     }
+
+    // Cycle detection in an undirected graph using DFS
+    hasCycleUndirected() {
+        let visited = new Set();
+
+        const dfs = (node, parent) => {
+            visited.add(node);
+
+            for (let neighbor of this.adjList[node]) {
+                if (!visited.has(neighbor)) {
+                    if (dfs(neighbor, node)) return true;
+                } else if (neighbor !== parent) {
+                    return true;
+                }
+            }
+            return false;
+        };
+
+        for (let vertex in this.adjList) {
+            if (!visited.has(vertex)) {
+                if (dfs(vertex, null)) return true;
+            }
+        }
+        return false;
+    }
 }
 
 const graph = new Graph();
@@ -90,3 +115,5 @@ console.log("All Paths from A to F:", graph.allPaths("A", "F"));
 console.log("Longest Path from A to F:", graph.longestPath("A", "F"));
 
 console.log(graph.findNeighbour('A'))
+
+console.log("Is the graph cyclic ?", graph.hasCycleUndirected());
