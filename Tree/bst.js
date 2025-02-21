@@ -121,19 +121,20 @@ class BinarySearchTree{
         return root
         
     }
-    findClosest(target){
+    findClosest(target) {
         let curr = this.root;
         let closest = this.root.value;
-        while(curr){
-            if(Math.abs(target-curr.value)<Math.abs(target-closest)){
+    
+        while (curr) {
+            if (Math.abs(target - curr.value) < Math.abs(target - closest)) {
                 closest = curr.value;
             }
-            if(target<curr.value){
+            if (target < curr.value) {
                 curr = curr.left;
-            }else if(target > curr.value){
+            } else if (target > curr.value) {
                 curr = curr.right;
-            }else{
-                return
+            } else {
+                return;
             }
         }
         return closest;
@@ -183,16 +184,10 @@ class BinarySearchTree{
         }
     }
     isSameTree(root1, root2){
-        if(!root1 && !root2){
-            return true; 
-        }
-        if(!root1 || !root2){
-            return false;
-        }
-        if(root1.value !== root2.value){
-            return false;
-        }
-        return this.isSameTree(root1.left, root2.left) && this.isSameTree(root1.right, root2.right);
+        if(!root1 && !root2) return true
+        if(!root1 || !root2) return false
+        if(root1.value !== root2.value) return false
+        return this.isSameTree(root1.left, root2.left) && this.isSameTree(root1.right, root2.right)
     }
     findLeafNodes(root) {
         if (!root) return;
@@ -202,7 +197,7 @@ class BinarySearchTree{
             return
         }
         this.findLeafNodes(root.left);
-        this.findLeafNodes(root.right);
+        this.findLeafNodes(root.right)
     }
     // Helper function to check if the tree is balanced
     isBalancedHelper(root) {
@@ -291,7 +286,7 @@ bst.delete(15)
 console.log('Minimum value is:',bst.min(bst.root))
 console.log('Maximum value is:',bst.max(bst.root))
 
-console.log('Closest value of ',12,' is:',bst.findClosest(12))
+console.log('Closest value of 6',bst.findClosest(6))
 
 console.log("Height of BST:", bst.height(bst.root));
 console.log("Depth of node 7:", bst.depth(bst.root, 7)); 
