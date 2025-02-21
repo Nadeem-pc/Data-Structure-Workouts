@@ -278,6 +278,27 @@ class BinarySearchTree{
         reverseInOrder(this.root);
         return result;
     } 
+    findKthSmallest(k) {
+        let count = 0;
+        let result = null;
+
+        const inOrder = (node) => {
+            if (!node || count >= k) return;
+
+            inOrder(node.left); 
+
+            count++;
+            if (count === k) {
+                result = node.value;
+                return;
+            }
+
+            inOrder(node.right);  
+        };
+
+        inOrder(this.root);
+        return result;
+    }
 }
 
 const bst = new BinarySearchTree();
