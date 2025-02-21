@@ -257,6 +257,27 @@ class BinarySearchTree{
         reverseInOrderTraversal(this.root);
         return secondLargest;
     }
+    findKthLargest(k) {
+        let count = 0;
+        let result = null;
+
+        const reverseInOrder = (node) => {
+            if (!node || count >= k) return;
+
+            reverseInOrder(node.right);  
+
+            count++;
+            if (count === k) {
+                result = node.value;
+                return;
+            }
+
+            reverseInOrder(node.left); 
+        };
+
+        reverseInOrder(this.root);
+        return result;
+    } 
 }
 
 const bst = new BinarySearchTree();
@@ -296,6 +317,10 @@ console.log("Degree of node 5:", bst.findDegree(bst.root, 5));
 
 console.log("Leaf nodes in BST:");
 bst.findLeafNodes(bst.root);
+
+console.log(bst.findKthLargest(1));
+console.log(bst.findKthLargest(3)); 
+
 
 // Checking is same tree
 const bst1 = new BinarySearchTree();
