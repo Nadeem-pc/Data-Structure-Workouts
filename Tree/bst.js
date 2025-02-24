@@ -199,7 +199,6 @@ class BinarySearchTree{
         this.findLeafNodes(root.left);
         this.findLeafNodes(root.right)
     }
-    // Helper function to check if the tree is balanced
     isBalancedHelper(root) {
         if (!root) return 0; 
 
@@ -212,7 +211,6 @@ class BinarySearchTree{
         if (Math.abs(leftHeight - rightHeight) > 1) return -1; 
         return Math.max(leftHeight, rightHeight) + 1; 
     }
-    // Main function to check if the BST is balanced
     isBalanced() {
         return this.isBalancedHelper(this.root) !== -1;
     }
