@@ -1,70 +1,89 @@
 // class Node {
-//     constructor(){
-//         this.children = {}
-//         this.isEndOfWord = false
+//     constructor(value){
+//         this.value = value
+//         this.left = null
+//         this.right = null
 //     }
 // }
-// class Trie {
+// class Bffffst {
 //     constructor(){
-//         this.root = new Node()
+//         this.root = null
 //     }
-//     insert(word){
-//         let node = this.root
-//         for(let char of word){
-//             if(!node.children[char]){
-//                 node.children[char] = new Node()
+//     insert(value){
+//         const newNode = new Node(value)
+//         if(!this.root){
+//             this.root = newNode
+//         }else{
+//             this.insertNode(this.root, newNode)
+//         }
+//     }
+//     insertNode(root, newNode){
+//         if(newNode.value < root.value){
+//             if(!root.left){
+//                 root.left = newNode
+//             }else{
+//                 this.insertNode(root.left, newNode)
 //             }
-//             node = node.children[char]
+//         }else{
+//             if(!root.right){
+//                 root.right = newNode
+//             }else{
+//                 this.insertNode(root.right, newNode)
+//             }
 //         }
-//         node.isEndOfWord = true
 //     }
-//     prefix(prefix){
-//         let node = this.root
-//         for(let char of prefix){
-//             if(!node.children[char]) return false
-//             node = node.children[char]
-//         }
-//         return true
+//     height(root){
+//         if(!root) return 0
+//         let leftHeight = this.height(root.left)
+//         let rightHeight = this.height(root.right)
+//         return Math.max(leftHeight,rightHeight) + 1
 //     }
 // }
-// const trie = new Trie()
-// trie.insert('car')
-// trie.insert('cap')
-// trie.insert('cat')
-// console.log(trie.prefix('ca'))
+// const tree = new Bst()
+// tree.insert(10)
+// tree.insert(5)
+// tree.insert(4)
+// tree.insert(20)
+// tree.insert(30)
+// console.log(tree.height(tree.root));
 
 
-class Node {
-    constructor(value){
-        this.value = value
-        this.left = null
-        this.right = null
-    }
-}
-class BinaryTree {
+class MaxHeap {
     constructor(){
-        this.root = null
+        this.heap = []
+    }
+    getParentIndex(index){
+        return Math.floor((index -1) / 2)
+    }
+    getLeftIndex(index){
+        return 2 * index + 1
+    }
+    getRightIndex(index){
+        return 2 * index + 2
+    }
+    swap(index1, index2){
+        [this.heap[index1], this.heap[index2]] = [this.heap[index2], this.heap[index1]]
     }
     insert(value){
-        const newNode = new Node(value)
-        if(!this.root){
-            this.root = newNode
-        }else{
-            this.balanceTree(this.root,newNode)
+        this.heap.push(value)
+        this.heapifyUp()
+    }
+    heapifyUp(){
+        let index = this.heap.length -1
+        while(index > 0){
+            let parentIndex = this.getParentIndex(index)
+            if(this.heap[parentIndex] < this.heap[index]){
+                this.swap(parentIndex, index)
+                index = parentIndex
+            }else{
+                break
+            }
         }
     }
-    balanceTree(root,newNode){
-        if(!root) return 0
-        let leftHeight = this.balanceTree(root.left,newNode)
-        if(leftHeight === -1) return -1
-        let rightHeight = this.balanceTree(root.right,newNode)
-        if(rightHeight === -1) return -1
-        if(Math.abs(leftHeight - rightHeight) > 1) return -1
-        return Math.max(leftHeight,rightHeight) + 1
-    }
 }
-const bt = new BinaryTree()
-bt.insert(5)
-bt.insert(25)
-bt.insert(35)
-bt.insert(15)
+const heap = new MaxHeap()
+heap.insert(10)
+heap.insert(20)
+heap.insert(5)
+heap.insert(30)
+console.log(heap.heap);

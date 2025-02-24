@@ -78,7 +78,7 @@ class BinarySearchTree{
                 queue.push(curr.left);
             }
             if(curr.right){
-                queue.push(curr.right)
+            queue.push(curr.right)      
             }
         }
     }
