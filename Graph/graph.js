@@ -74,8 +74,8 @@ graph.addVertex('C');
 graph.addEdge('A','B');
 graph.addEdge('B','C');
 graph.addEdge('E','A'); 
-// console.log(graph.hasEdge('B','C'))
-// graph.removeVertex('A')
+console.log(graph.hasEdge('B','C'))
+graph.removeVertex('A')
 graph.display()
 console.log(graph.bfs('A'))
 graph.dfs('A')

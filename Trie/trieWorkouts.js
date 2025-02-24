@@ -36,7 +36,6 @@ class Trie {
             this.collectWords(node.children[char], prefix + char, words)
         }
     }
-
     // Count total words stored in Trie
     countWords(){
         return this.countWordsHelper(this.root)

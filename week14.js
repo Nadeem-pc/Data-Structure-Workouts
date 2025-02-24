@@ -292,3 +292,27 @@ function findUniqueElements(str) {
   return Object.keys(hashTable).filter(char => hashTable[char] === 1);
 }
 console.log(findUniqueElements("Swiss")); 
+
+// 230
+var kthSmallest = function (root, k) {
+  let ans, count = 0
+  function inOrder(root) {
+      if (!root) return
+      inOrder(root.left)
+      count++
+      if (count === k) return ans = root.val
+      inOrder(root.right)
+  }
+  inOrder(root)
+  return ans
+};
+
+// 215
+var findKthLargest = function (nums, k) {
+  const heap = new MaxPriorityQueue()
+  for (let i = 0; i < nums.length; i++)
+      heap.enqueue(nums[i])
+  while (k-- > 1)
+      heap.dequeue()
+  return heap.front().element
+};

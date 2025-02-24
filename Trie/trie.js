@@ -77,6 +77,7 @@ trie.insert('doll');
 
 console.log(trie.search("cat")); 
 console.log(trie.startsWith("do"));
+    
 
 console.log(trie.autoComplete('ca'));   
 console.log(trie.autoComplete('do'));   
