@@ -132,3 +132,25 @@ console.log("Stack after reversing:");
 stack2.print(); 
 
 console.log("Popped element:", stack2.pop()); 
+
+
+// Find the next greater element for each element in the array.
+// * The next greater element of a number x is the first greater number to its right.
+// * If no such number exists, use -1.
+
+function nextGreaterElement(arr) {
+    let stack = [];
+    let result = new Array(arr.length).fill(-1);
+
+    for (let i = arr.length - 1; i >= 0; i--) {
+        while (stack.length > 0 && stack[stack.length - 1] <= arr[i]) {
+            stack.pop();
+        }
+        if (stack.length > 0) {
+            result[i] = stack[stack.length - 1];
+        }
+        stack.push(arr[i]);
+    }
+    return result;
+}
+console.log(nextGreaterElement([4, 5, 2, 10, 8])); 
