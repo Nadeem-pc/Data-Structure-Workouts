@@ -104,3 +104,59 @@ queueUsingLL.enqueue(30);
 console.log("Front element:", queueUsingLL.peek()); 
 console.log("Dequeued:", queueUsingLL.dequeue());  
 console.log("Front element:", queueUsingLL.peek()); 
+
+
+
+// Queue implementation using Two Stacks                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      
+class QueueUsingStacks {
+    constructor() {
+        this.stack1 = []; 
+        this.stack2 = []; 
+    }
+
+    enqueue(value) {
+        this.stack1.push(value);
+    }
+
+    dequeue() {
+        if (this.isEmpty()) {
+            return "Queue is empty";
+        }
+        if (this.stack2.length === 0) {
+            while (this.stack1.length > 0) {
+                this.stack2.push(this.stack1.pop());
+            }
+        }
+        return this.stack2.pop();
+    }
+
+    peek() {
+        if (this.isEmpty()) {
+            return "Queue is empty";
+        }
+        if (this.stack2.length === 0) {
+            while (this.stack1.length > 0) {
+                this.stack2.push(this.stack1.pop());
+            }
+        }
+        return this.stack2[this.stack2.length - 1];
+    }
+
+    isEmpty() {
+        return this.stack1.length === 0 && this.stack2.length === 0;
+    }
+    print() {
+        let result = [...this.stack2.reverse(), ...this.stack1].join(" ");
+        console.log(result);
+    }
+}
+
+let queue2 = new QueueUsingStacks();
+queue2.enqueue(10);
+queue2.enqueue(20);
+queue2.enqueue(30);
+
+console.log("Dequeue:", queue2.dequeue()); 
+console.log("Peek:", queue2.peek());       
+queue2.enqueue(40);
+console.log("Dequeue:", queue2.dequeue()); 
