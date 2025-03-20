@@ -103,7 +103,7 @@ function findDuplicates(str) {
     
     return [...duplicates];
 }
-console.log(findDuplicates("nadeem"));
+console.log(findDuplicates("apple"));
 
 
 // Finding unique elements
