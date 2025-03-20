@@ -104,3 +104,16 @@ function findDuplicates(str) {
     return [...duplicates];
 }
 console.log(findDuplicates("nadeem"));
+
+
+// Finding unique elements
+function findUniqueElements(str) {
+    const hashTable = {};
+    
+    for (let char of str.toLowerCase()) {
+        if (char !== " ") hashTable[char] = (hashTable[char] || 0) + 1;
+    }
+    
+    return Object.keys(hashTable).filter(char => hashTable[char] === 1);
+}
+console.log(findUniqueElements("Swiss")); 
