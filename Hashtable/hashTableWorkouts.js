@@ -87,3 +87,20 @@ var twoSum = function(nums, target) {
     return []; 
 };
 console.log(twoSum([2, 7, 11, 15], 9))
+
+
+// Finding duplicates
+function findDuplicates(str) {
+    const hashTable = {};
+    const duplicates = new Set();
+  
+    for (let char of str) {
+        if (char !== " ") {
+            hashTable[char] = (hashTable[char] || 0) + 1;
+            if (hashTable[char] > 1) duplicates.add(char);
+        }
+    }
+    
+    return [...duplicates];
+}
+console.log(findDuplicates("nadeem"));
