@@ -66,3 +66,22 @@ function firstGreaterThan(arr, target) {
     return `${result} is the first element that is greater than ${target}`;
 }
 console.log(firstGreaterThan(arr, 6));  
+
+
+// Binary Search using Recursion 
+function binarySearchRecursive(arr, target, left = 0, right = arr.length - 1) {
+    if (left > right) {
+        return 'Element Not found'
+    }
+
+    let mid = Math.floor((left + right) / 2)
+
+    if (arr[mid] === target) {
+        return `Element found at index ${mid}`
+    } else if (arr[mid] < target) {
+        return binarySearchRecursive(arr, target, mid + 1, right)
+    } else {
+        return binarySearchRecursive(arr, target, left, mid - 1)
+    }
+}
+console.log(binarySearchRecursive(arr, 7))
