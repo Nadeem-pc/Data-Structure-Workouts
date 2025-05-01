@@ -258,3 +258,102 @@ hashTable.set('dream','BMW M5 Cs')
 hashTable.set('car', 'Porsche 911');
 hashTable.set('race', 'Formula 1'); 
 hashTable.display()
+
+
+// Hashtable using Linked list
+class ListNode {
+    constructor(key, value, next = null) {
+        this.key = key;
+        this.value = value;
+        this.next = next;
+    }
+}
+
+class HashTableUsingLL {
+    constructor(size = 10) {
+        this.table = new Array(size);
+    }
+
+    _hash(key) {
+        let hash = 0;
+        for (let char of key) {
+            hash += char.charCodeAt(0);
+        }
+        return hash % this.table.length;
+    }
+
+    set(key, value) {
+        const index = this._hash(key);
+        let head = this.table[index];
+
+        // Update if key exists
+        while (head) {
+            if (head.key === key) {
+                head.value = value;
+                return;
+            }
+            head = head.next;
+        }
+
+        // Insert new node at beginning
+        const newNode = new ListNode(key, value, this.table[index]);
+        this.table[index] = newNode;
+    }
+
+    get(key) {
+        const index = this._hash(key);
+        let head = this.table[index];
+
+        while (head) {
+            if (head.key === key) {
+                return head.value;
+            }
+            head = head.next;
+        }
+
+        return undefined;
+    }
+
+    delete(key) {
+        const index = this._hash(key);
+        let head = this.table[index];
+        let prev = null;
+
+        while (head) {
+            if (head.key === key) {
+                if (prev) {
+                    prev.next = head.next;
+                } else {
+                    this.table[index] = head.next;
+                }
+                return;
+            }
+            prev = head;
+            head = head.next;
+        }
+    }
+
+    display() {
+        this.table.forEach((head, index) => {
+            let current = head;
+            while (current) {
+                console.log(`${current.key} : ${current.value}`);
+                current = current.next;
+            }
+        });
+    }
+}
+
+const tableUsingLL = new HashTableUsingLL();
+tableUsingLL.set("name", "Alice");
+tableUsingLL.set("age", 25);
+tableUsingLL.set("gender", "female");
+
+tableUsingLL.display();
+
+console.log("Get name:", tableUsingLL.get("name")); 
+console.log("Get age:", tableUsingLL.get("age"));   
+
+tableUsingLL.delete("name");
+
+console.log("Get name after delete:", tableUsingLL.get("name")); 
