@@ -83,7 +83,7 @@ class BinarySearchTree{
         )
     }
     height(root) {
-        if (!root) return 0;
+        if (!root) return -1;
         let leftHeight = this.height(root.left);
         let rightHeight = this.height(root.right);
         return Math.max(leftHeight, rightHeight) + 1;
