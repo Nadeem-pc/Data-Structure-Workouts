@@ -36,6 +36,6 @@ function fib(n){
     return fib(n - 1) + fib(n - 2)
 }
 let count = 10
-    for(let i = 0; i < count; i++){
+    for(let i = 0; i <= count; i++){
     console.log(fib(i))
 }
