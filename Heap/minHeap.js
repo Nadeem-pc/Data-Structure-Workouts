@@ -47,7 +47,7 @@ class MinHeap{
     heapifyDown(i){
         let n = this.heap.length
         let arr = this.heap
-        let smallest = i;
+        let smallest = i;    
         let left = 2*i+1;
         let right = 2*i+2;
         if(left<n && arr[left]<arr[smallest]){

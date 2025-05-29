@@ -51,7 +51,7 @@ class MaxHeap {
         let n = this.heap.length
         let largest = i
         let left = this.getLeftIndex(i)
-        let right = this.getRightIndex(i)
+        let right = this.getRightIndex(i) 
         
         if(left < n && this.heap[left] > this.heap[largest]){
             largest = left

@@ -230,6 +230,37 @@ class LinkedList {
         this.size--;
     }
 
+    // Delete mid node using slow & fast pointer method
+    deleteMidNode() {
+        if (!this.head) {
+          console.log('List is empty');
+          return;
+        }
+    
+        if (!this.head.next) {
+          this.head = null;
+          this.tail = null;
+          return;
+        }
+    
+        let slow = this.head;
+        let fast = this.head;
+        let prev = null;
+    
+        while (fast && fast.next) {
+          fast = fast.next.next;
+          prev = slow;
+          slow = slow.next;
+        }
+    
+        prev.next = slow.next;
+    
+        if (slow === this.tail) {
+          this.tail = prev;
+        }
+    }
+
+
     // Convert array to linked list 
     arrayToLinkedList(arr) {
         arr.forEach(item => this.append(item));
