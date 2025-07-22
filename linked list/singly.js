@@ -198,6 +198,22 @@ class LinkedList {
         this.size--;
     }
 
+    // Find middle node
+    findMidNode(){
+        if(!this.head){
+            console.log('List is empty')
+            return
+        }
+        let slow = this.head
+        let fast = this.head
+
+        while(fast && fast.next){
+            slow = slow.next
+            fast = fast.next.next
+        }
+        console.log(slow.value)
+    }
+
     // Delete middle node 
     deleteMid() {
         if (this.size === 0) {
@@ -400,9 +416,13 @@ list.append(1);
 list.append(2);
 list.append(3);
 list.append(4);
+list.append(5);
 
 console.log("Original list:");
 list.print();
+
+console.log('Middle node of this list is: ')
+list.findMidNode()
 
 list.addAtBeginning(0);
 console.log("\nAfter adding 0 at beginning:");
@@ -420,7 +440,6 @@ list.deleteFromEnd();
 console.log("\nAfter deleting from end:");
 list.print();
 
-// Delete node with value
 list.deleteNode(2.5);
 console.log("\nAfter deleting node with value 2.5:");
 list.print();
